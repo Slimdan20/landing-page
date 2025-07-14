@@ -14,11 +14,10 @@ jobs:
             ls -lah
             cat budget.json
 
-
       - run:
           name: Run Sitespeed.io against deployed site
           command: |
-            docker run --rm -v "$PWD:/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
+            docker run --rm -v "/home/circleci/project:/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
               https://landing-page-iota-virid.vercel.app/ \
               --budget.configPath /sitespeed.io/budget.json
 
