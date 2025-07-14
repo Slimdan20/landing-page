@@ -2,16 +2,10 @@ version: 2.1
 
 jobs:
   performance-budget-check:
-    machine: true  # Use full Linux VM with native Docker access
-    working_directory: ~/repo  # Set working directory for clarity
+    machine: true 
+    working_directory: ~/repo 
     steps:
-      - checkout  # Clone your GitHub repo into the VM
-
-      - run:
-          name: Confirm budget.json is present
-          command: |
-            ls -lah
-            cat budget.json
+      - checkout 
 
       - run:
           name: Run Sitespeed.io against deployed site
