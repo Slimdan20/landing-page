@@ -13,7 +13,7 @@ jobs:
           command: |
             docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
               https://landing-page-iota-virid.vercel.app/ \
-              --budget.configPath /sitespeed.io/budget.json
+              --budget.configPath budget.json
 
       - store_artifacts:
           path: sitespeed-result
