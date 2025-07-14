@@ -6,8 +6,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
 
       - run:
           name: Confirm budget.json is present (host)
@@ -18,8 +17,8 @@ jobs:
       - run:
           name: Confirm budget.json is visible inside Docker
           command: |
-            docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
-              bash -c "ls -lah /sitespeed.io && cat /sitespeed.io/budget.json"
+            docker run --rm -v "$(pwd):/project" cimg/base:stable \
+              bash -c "ls -lah /project && cat /project/budget.json"
 
       - run:
           name: Run Sitespeed.io against deployed site
