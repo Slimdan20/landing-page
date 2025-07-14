@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  performance-budget-check:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+
+      - run:
+          name: Run Sitespeed.io against deployed site
+          command: |
+            docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
+            https://landing-page-iota-virid.vercel.app/ \
+            --budget.configPath budget.json
+
+      - store_artifacts:
+          path: sitespeed-result
+          destination: sitespeed-report
+
+workflows:
+  version: 2
+  enforce-performance-budget:
+    jobs:
+      - performance-budget-check

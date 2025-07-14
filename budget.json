@@ -1,0 +1,24 @@
+{
+  "budget": {
+    "googleWebVitals": {
+      "firstContentfulPaint": 1800,
+      "largestContentfulPaint": 2500,
+      "cumulativeLayoutShift": 0.1,
+      "totalBlockingTime": 200
+    },
+    "requests": {
+      "total": 50,
+      "javascript": 10,
+      "css": 5,
+      "image": 25,
+      "font": 5
+    },
+    "transferSize": {
+      "total": 5500000,
+      "javascript": 150000,
+      "css": 100000,
+      "image": 4500000,
+      "font": 650000
+    }
+  }
+}
