@@ -6,24 +6,38 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - setup_remote_docker
 
       - run:
-          name: Confirm budget.json is present (host)
+          name: Confirm budget.json exists
           command: |
             ls -lah
             cat budget.json
 
+      - persist_to_workspace:
+          root: .
+          paths:
+            - budget.json
+
+  run-sitespeed:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /workspace
+
       - run:
           name: Confirm budget.json is visible inside Docker
           command: |
-            docker run --rm -v "/home/circleci/project:/project" cimg/base:stable \
+            docker run --rm -v "/workspace:/project" cimg/base:stable \
               bash -c "ls -lah /project && cat /project/budget.json"
 
       - run:
           name: Run Sitespeed.io against deployed site
           command: |
-            docker run --rm -v "/home/circleci/project:/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
+            docker run --rm -v "/workspace:/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
               https://landing-page-iota-virid.vercel.app/ \
               --budget.configPath /sitespeed.io/budget.json
 
@@ -32,7 +46,10 @@ jobs:
           destination: sitespeed-report
 
 workflows:
-  version: 2.1
+  version: 2
   enforce-performance-budget:
     jobs:
       - performance-budget-check
+      - run-sitespeed:
+          requires:
+            - performance-budget-check
