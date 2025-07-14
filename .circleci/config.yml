@@ -20,7 +20,7 @@ jobs:
           destination: sitespeed-report
 
 workflows:
-  version: 2
+  version: 2.1
   enforce-performance-budget:
     jobs:
       - performance-budget-check
