@@ -13,8 +13,14 @@ jobs:
             ls -lah
             cat budget.json
 
+      - run:
+          name: Prepare workspace directory
+          command: |
+            mkdir -p workspace
+            cp budget.json workspace/
+
       - persist_to_workspace:
-          root: .
+          root: workspace
           paths:
             - budget.json
 
