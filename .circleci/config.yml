@@ -9,11 +9,18 @@ jobs:
       - setup_remote_docker
 
       - run:
+        name: Confirm budget.json is present
+        command: |
+          ls -lah
+          cat budget.json
+
+
+      - run:
           name: Run Sitespeed.io against deployed site
           command: |
-            docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
+            docker run --rm -v "$PWD:/sitespeed.io" sitespeedio/sitespeed.io:37.9.0 \
               https://landing-page-iota-virid.vercel.app/ \
-              --budget.configPath budget.json
+              --budget.configPath /sitespeed.io/budget.json
 
       - store_artifacts:
           path: sitespeed-result
