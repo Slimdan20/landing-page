@@ -9,10 +9,10 @@ jobs:
       - setup_remote_docker
 
       - run:
-        name: Confirm budget.json is present
-        command: |
-          ls -lah
-          cat budget.json
+          name: Confirm budget.json is present
+          command: |
+            ls -lah
+            cat budget.json
 
 
       - run:
