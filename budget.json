@@ -14,11 +14,11 @@
       "font": 5
     },
     "transferSize": {
-      "total": 45000,
-      "javascript": 15000,
-      "css": 10000,
-      "image": 5000,
-      "font": 5000
+      "total": 5500000,
+      "javascript": 150000,
+      "css": 100000,
+      "image": 4500000,
+      "font": 650000
     }
   }
 }
